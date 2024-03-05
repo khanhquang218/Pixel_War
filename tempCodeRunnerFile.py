@@ -1,2 +1,2 @@
 
-            for col_index, col in enumerate(row):
+         for event in pygame.event.get():
