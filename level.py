@@ -3,8 +3,9 @@ from settings import *
 from tile import Tile
 from player import Player
 from debug import debug
-from random import choice
 from support import *
+from random import choice
+from weapon import Weapon
 
 class Level:
    def __init__(self):
@@ -44,11 +45,16 @@ class Level:
                      surf = graphics['objects'][int(col)]
                      Tile((x,y), [self.visible_sprites,self.obstacles_sprites], 'objects', surf)
                      
-      self.player = Player((2000,1430), [self.visible_sprites], self.obstacles_sprites)
+      self.player = Player((2000,1430), [self.visible_sprites], self.obstacles_sprites, self.create_attack)
+
+   def create_attack(self):
+      Weapon(self.player,[self.visible_sprites])
+
    def run(self):
       # update and draw the game
       self.visible_sprites.custom_draw(self.player)
       self.visible_sprites.update()
+      debug(self.player.status)
 
 class YSortCameraGroup(pygame.sprite.Group):
    def __init__(self):
